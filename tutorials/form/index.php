@@ -9,7 +9,7 @@
   <body>
     
     <div class="container">
-        <form action="./submit.php" method="post">
+        <form id="myForm">
             <div class="row">
                 <div class="mb-3 col-6">
                     <label for="name" class="form-label">Name</label>
@@ -29,5 +29,15 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      const myForm = document.querySelector('#myForm');
+      myForm.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        fetch('./submit.php', {
+          method: 'post',
+          body:{name:'azadd'}
+        })
+      })
+    </script>
   </body>
 </html>
