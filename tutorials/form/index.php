@@ -6,9 +6,17 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
+  <style>
+    .error{
+      color: red;
+    }
+  </style>
   <body>
     
     <div class="container">
+      <div class="error">
+
+      </div>
         <form id="myForm">
             <div class="row">
                 <div class="mb-3 col-6">
@@ -24,19 +32,29 @@
                     <input type="number" class="form-control" id="phone" name="phone">
                 </div>
             </div>
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
       const myForm = document.querySelector('#myForm');
-      myForm.addEventListener('submit', (e)=>{
+      const errorBox = document.querySelector('.error');
+      myForm.addEventListener('submit', async (e)=>{
+        let formData = new FormData(myForm);
+        // console.log(Array.from(formData));
+        // console.log(...formData);
         e.preventDefault();
-        fetch('./submit.php', {
+        let response = await fetch('./submit.php', {
           method: 'post',
-          body:{name:'azadd'}
+          body: formData,
         })
+        if(!response.ok){
+          console.log('something went wrong');
+        }
+        let resText = await response.text();
+        console.log(resText);
+        errorBox.innerHTML = resText;
       })
     </script>
   </body>
