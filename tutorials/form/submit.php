@@ -17,6 +17,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
+    // $image = $_POST['image'];
+    // echo "<pre>";
+    // // print_r($_POST);
+    // // print_r($_FILES);
+    
+    // echo "</pre>";
     $name_pattern = '/^[a-zA-Z]+[ a-zA-Z]+/';
     $phone_pattern = '/^[0-9]{10}$/';
     $email_pattern = '/[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]{2,}/';
@@ -36,7 +42,30 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
     
     if($isNameValid && $isPhoneValid && $isEmailValid){
-        echo "form submitted";
+        if(isset($_FILES)){
+            $file = $_FILES['image'];
+            $file_name = $file['name'];
+            $file_temp = $file['tmp_name'];
+            $file_size = $file['size'];
+            $target = 'uploads/';
+            // 'uploads/img006.jpg';
+            $path = $target.$file_name;
+            $file_extension = pathinfo($path, PATHINFO_EXTENSION);
+            if(file_exists($path)){
+                echo "file already exists";
+            }else{
+                if($file_extension != 'pdf'){
+                    echo "please upload pdf file";
+                }else{
+                    if(move_uploaded_file($file_temp, $path)){
+                        echo "file uploaded succesfully";
+                    }else{
+                        echo "something went wrong";
+                    }
+                }
+            }
+            
+        }
     }
 }
 

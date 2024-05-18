@@ -1,3 +1,7 @@
+<?php
+print_r($_POST);
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,8 +21,7 @@
       <div class="error">
 
       </div>
-        <!-- <form action="./submit.php" method="post" enctype="multipart/form-data"> -->
-        <form id="myForm" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="mb-3 col-6">
                     <label for="name" class="form-label">Name</label>
@@ -39,7 +42,7 @@
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
-        <!-- <button class="btn btn-success my-3 loaddata">Load Data</button> -->
+        <button class="btn btn-success my-3 loaddata">Load Data</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -51,7 +54,6 @@
         let formData = new FormData(myForm);
         // console.log(Array.from(formData));
         // console.log(...formData);
-        formData.append('status', 'Active');
         e.preventDefault();
         let response = await fetch('./submit.php', {
           method: 'post',
