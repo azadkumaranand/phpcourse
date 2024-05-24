@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(isset($_SESSION['form-data']) && isset($_COOKIE['form-data'])){
+  print_r($_SESSION['form-data']);
+  print_r($_COOKIE['form-data']);
+}
+
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -18,7 +28,7 @@
 
       </div>
         <!-- <form action="./submit.php" method="post" enctype="multipart/form-data"> -->
-        <form id="myForm" enctype="multipart/form-data">
+        <form action="./submit.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="mb-3 col-6">
                     <label for="name" class="form-label">Name</label>
